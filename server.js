@@ -3,6 +3,7 @@ const { connectDB } = require("./db/db.js");
 const userRoutes = require("./routes/userRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 dotenv.config();
@@ -11,6 +12,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 connectDB();
 
