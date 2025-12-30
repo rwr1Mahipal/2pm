@@ -1,10 +1,13 @@
 const express = require("express");
-const { connectDB } = require("./db/db.js");
-const userRoutes = require("./routes/userRoutes.js");
-const adminRoutes = require("./routes/adminRoutes.js");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+
+const { connectDB } = require("./db/db.js");
+const userRoutes = require("./routes/userRoutes.js");
+const adminRoutes = require("./routes/adminRoutes.js");
+const productRoutes = require("./routes/productRoutes.js");
+const cartRoutes = require("./routes/cartRoutes.js");
 
 dotenv.config();
 
@@ -24,6 +27,8 @@ connectDB();
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/admin", adminRoutes);
+app.use("/api/v1/product", productRoutes);
+app.use("/api/v1/cart", cartRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log("Server is working om 5000");
