@@ -6,7 +6,7 @@ const { isAuth } = require("../middleware/isAuth");
 const router = express.Router();
 
 router.post("/login", adminLogin);
-router.get("/:id", isAuth, isAdmin, singleUser);
+// router.get("/:id", isAuth, isAdmin, singleUser);
 router.get("/getall", isAuth, isAdmin, getAll);
 
 

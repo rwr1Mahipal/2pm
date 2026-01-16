@@ -8,6 +8,7 @@ const userRoutes = require("./routes/userRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
 const productRoutes = require("./routes/productRoutes.js");
 const cartRoutes = require("./routes/cartRoutes.js");
+const paymentRoutes = require("./routes/paymentRoute.js");
 
 dotenv.config();
 
@@ -29,9 +30,10 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/admin", adminRoutes);
 app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/cart", cartRoutes);
+app.use("/api/v1/payment", paymentRoutes);
 
 app.listen(process.env.PORT, () => {
-  console.log("Server is working om 5000");
+  console.log(`Server is working om ${process.env.PORT}`);
 });
 
 app.use((error, req, res, next) => {

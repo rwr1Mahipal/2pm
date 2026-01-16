@@ -70,13 +70,34 @@ exports.getAll = async (req, res) => {
   res.status(201).json({ success: true, allUser });
 };
 
-exports.singleUser = async (req, res) => {
-  const id = req.params.id;
-  const user = await User.findById(id);
-  if (!user) {
-    return res.status(400).json({ message: "User not found" });
+// exports.singleUser = async (req, res) => {
+//   const id = req.params.id;
+//   const user = await User.findById(id);
+//   if (!user) {
+//     return res.status(400).json({ message: "User not found" });
+//   }
+//   res.status(201).json({ success: true, user });
+// };
+
+exports.loadUser = async (req, res) => {
+  try {
+    const id = req.user.id;
+    const userid = await User.findOne().select("-password");
+
+    if (!userid) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      userid,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+      error: error.message,
+    });
   }
-  res.status(201).json({ success: true, user });
 };
 
 exports.updateUser = async (req, res) => {
